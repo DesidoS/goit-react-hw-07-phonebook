@@ -1,21 +1,18 @@
-// import axios from 'axios';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
 import Section from './Section';
 import { Container } from './App.styled';
 import { fetchContacts } from 'redux/operations';
-import { getError, getIsLoading, getContacts } from 'redux/selectors';
+import { selectError, selectIsLoading, selectContacts } from 'redux/selectors';
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
-  const contacts = useSelector(getContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const contacts = useSelector(selectContacts);
 
   useEffect(() => {
     dispatch(fetchContacts());

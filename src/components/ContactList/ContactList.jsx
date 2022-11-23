@@ -3,18 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GiFactory, GiSmartphone, GiFamilyHouse } from 'react-icons/gi';
 import { TiDelete } from 'react-icons/ti';
 import { deleteContact } from 'redux/operations';
+import { selectFilter, selectContacts } from 'redux/selectors';
 
 const ContactList = () => {
   const dispatch = useDispatch();
-  const state = useSelector(state => state);
+  const filters = useSelector(selectFilter);
+  const contacts = useSelector(selectContacts);
   const handleDelete = id => dispatch(deleteContact(id));
-  const getVisibleContacts = () => {
-    if (!state.filters) return state.contacts.items;
-    return state.contacts.items.filter(contact => {
-      return contact.name.toLowerCase().includes(state.filters?.toLowerCase());
+  const getVisibleContacts = (contacts, filters) => {
+    if (filters === '') return contacts;
+    return contacts.filter(contact => {
+      return contact.name.toLowerCase().includes(filters?.toLowerCase());
     });
   };
-  const visibleContacts = getVisibleContacts();
+  const visibleContacts = getVisibleContacts(contacts, filters);
   if (!visibleContacts) return;
   return (
     <List>

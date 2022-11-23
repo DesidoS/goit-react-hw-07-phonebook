@@ -50,9 +50,9 @@ const ContactForm = () => {
   const onSubmit = e => {
     e.preventDefault();
     const form = e.target;
-    if (contacts.length > 0) {
+    if (contacts.items.length > 0) {
       const contactsInPhonebook = [];
-      contacts.forEach(({ name }) =>
+      contacts.items.forEach(({ name }) =>
         contactsInPhonebook.push(name.toLowerCase())
       );
       if (contactsInPhonebook.includes(name.toLowerCase())) {
