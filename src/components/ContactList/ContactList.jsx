@@ -9,7 +9,9 @@ const ContactList = () => {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilter);
   const contacts = useSelector(selectContacts);
-  const handleDelete = id => dispatch(deleteContact(id));
+  const handleDelete = id => {
+    return dispatch(deleteContact(id));
+  };
   const getVisibleContacts = (contacts, filters) => {
     if (filters === '') return contacts;
     return contacts.filter(contact => {
